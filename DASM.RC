@@ -1,0 +1,576 @@
+/****************************************************************************
+
+
+dasm.rc
+
+produced by Borland Resource Workshop
+
+
+*****************************************************************************/
+
+#include <windows.h>
+#include "menuids.rh"
+
+main_menu MENU 
+{
+ POPUP "&File"
+ {
+  MENUITEM "&Open New File", file_open
+  MENUITEM SEPARATOR
+  MENUITEM "Load Database", load_database
+  MENUITEM "Save As Database", save_database, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "&Save As Text", file_save, GRAYED
+  MENUITEM "Save as &Asm", save_asm, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "E&xit", file_exit
+ }
+
+ POPUP "&Search"
+ {
+  MENUITEM "&Main Search Engine", main_search, GRAYED
+  MENUITEM "&Search Again", search_again, GRAYED
+ }
+
+ POPUP "&Current Line"
+ {
+  MENUITEM "Make into &Code", make_code, GRAYED
+  POPUP "Make into &Data"
+  {
+   MENUITEM "&Dword", make_dword, GRAYED
+   MENUITEM "&Word", make_word, GRAYED
+   POPUP "&String"
+   {
+    MENUITEM "&C Style (ends zero)", make_string, GRAYED
+    MENUITEM "&Pascal Style (length+string)", pascal_string, GRAYED
+    MENUITEM "&Unicode C Style", uc_string, GRAYED
+    MENUITEM "Unicode Pascal Style", up_string, GRAYED
+    MENUITEM "&DOS Style (ends $)", dos_string, GRAYED
+    MENUITEM "&General String (printable chars)", general_string, GRAYED
+   }
+
+   POPUP "&Floating Point"
+   {
+    MENUITEM "&Single Real", float_single, GRAYED
+    MENUITEM "&Double Real", float_double, GRAYED
+    MENUITEM "&Long Double", float_longdouble, GRAYED
+   }
+
+  }
+
+  POPUP "&Undefine"
+  {
+   MENUITEM "&This Line", undefine_line, GRAYED
+   MENUITEM "&Next 10 Lines", undefine_lines, GRAYED
+   MENUITEM "&Until gap/xref/comment", undefine_lines_long, GRAYED
+  }
+
+  MENUITEM "&Name", Name_Location, GRAYED
+  POPUP "&Argument Override"
+  {
+   MENUITEM "&Decimal", argover_dec, GRAYED
+   MENUITEM "&Hex", argover_hex, GRAYED
+   MENUITEM "&Char", argover_char, GRAYED
+   POPUP "&Offset"
+   {
+    MENUITEM "&Dseg", offset_dseg, GRAYED
+   }
+
+   MENUITEM "&Single Real", arg_single, GRAYED
+   MENUITEM "&Negate Immediate", argnegate, GRAYED
+  }
+
+  MENUITEM "&Enter Comment", get_comment, GRAYED
+ }
+
+ POPUP "&Block"
+ {
+  MENUITEM "Mark &Top", block_top, GRAYED
+  MENUITEM "Mark &Bottom", block_bottom, GRAYED
+  MENUITEM "&View Extents", block_view, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "&Undefine", block_undefine, GRAYED
+  MENUITEM "Save as &Asm", block_saveasm, GRAYED
+  MENUITEM "&Save as Text", block_savetext, GRAYED
+  MENUITEM "&Decrypt", cm_decrypt, GRAYED
+ }
+
+ POPUP "&Jumps and Calls"
+ {
+  MENUITEM "Follow &Jump/Call/Arg Address", line_jumpto, GRAYED
+  MENUITEM "Ju&mp To Address (other arg)", line_jumptoarg2, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "Jump Back/&Return", Jump_Back, GRAYED
+  MENUITEM "Jump &To [Entered Address]",  jump_to, GRAYED
+ }
+
+ POPUP "&View"
+ {
+  MENUITEM "&Segments", view_segment, GRAYED
+  MENUITEM "&Names", view_names, GRAYED
+  MENUITEM "&Xrefs", view_xrefs, GRAYED
+  MENUITEM "&Imports", view_imports, GRAYED
+  MENUITEM "&Exports", view_exports, GRAYED
+ }
+
+ POPUP "&Other"
+ {
+  POPUP "&Display Options"
+  {
+   POPUP "&Font"
+   {
+    MENUITEM "&ANSI_FIXED_FONT", font_ansi
+    MENUITEM "&SYSTEM_FIXED_FONT", font_system
+    MENUITEM "&Courier Font[8]", font_courier
+    MENUITEM "Courier Font[10]", font_courier10
+    MENUITEM "Courier Font[12]", font_courier12
+   }
+
+   POPUP "&Colours"
+   {
+    MENUITEM "Set &Text Colour", set_text_color
+    MENUITEM "Set &Highlight Colour", set_high_color
+    MENUITEM "Set &Background Colour", set_bg_color
+   }
+
+  }
+
+ }
+
+ POPUP "&Help"
+ {
+  MENUITEM "&Shortcuts", help_short
+  MENUITEM "&About", help_about
+ }
+
+}
+
+right_click_menu MENU 
+{
+ POPUP "Borg"
+ {
+  POPUP "&Block"
+  {
+   MENUITEM "Mark &Top", block_top, GRAYED
+   MENUITEM "Mark &Bottom", block_bottom, GRAYED
+  }
+
+  MENUITEM "Make into &Code", make_code, GRAYED
+  POPUP "Make into &Data"
+  {
+   MENUITEM "&Dword", make_dword, GRAYED
+   MENUITEM "&Word", make_word, GRAYED
+   POPUP "&String"
+   {
+    MENUITEM "&C Style", make_string, GRAYED
+    MENUITEM "&Pascal Style", pascal_string, GRAYED
+    MENUITEM "&Unicode C Style", uc_string, GRAYED
+    MENUITEM "Unicode Pascal Style", up_string, GRAYED
+    MENUITEM "&DOS Style (ends $)", dos_string, GRAYED
+    MENUITEM "&General String (printable chars)", general_string, GRAYED
+   }
+
+   POPUP "&Floating Point"
+   {
+    MENUITEM "&Single Real", float_single, GRAYED
+    MENUITEM "&Double Real", float_double, GRAYED
+    MENUITEM "&Long Double", float_longdouble, GRAYED
+   }
+
+  }
+
+  POPUP "&Undefine"
+  {
+   MENUITEM "&This Line", undefine_line, GRAYED
+   MENUITEM "&Next 10 Lines", undefine_lines, GRAYED
+   MENUITEM "&Until gap/lines/comment", undefine_lines_long, GRAYED
+  }
+
+  MENUITEM "&Jump To Address", line_jumpto, GRAYED
+  MENUITEM "&Name", Name_Location, GRAYED
+  MENUITEM "&View Xrefs", view_xrefs, GRAYED
+  POPUP "&Argument Override"
+  {
+   MENUITEM "&Decimal", argover_dec, GRAYED
+   MENUITEM "&Hex", argover_hex, GRAYED
+   MENUITEM "&Char", argover_char, GRAYED
+   POPUP "&Offset"
+   {
+    MENUITEM "&Dseg", offset_dseg, GRAYED
+   }
+
+   MENUITEM "&Single Real", arg_single, GRAYED
+   MENUITEM "&Negate Immediate", argnegate, GRAYED
+  }
+
+  MENUITEM "&Enter Comment", get_comment, GRAYED
+ }
+
+}
+
+1 VERSIONINFO 
+FILEVERSION 2, 0, 0, 0
+PRODUCTVERSION 2, 0, 0, 0
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "040904E4"
+  {
+   VALUE "CompanyName", "Cronos\000\000"
+   VALUE "FileDescription", "Borg Disassembler\000"
+   VALUE "FileVersion", "2.11\000\000"
+   VALUE "InternalName", "Borg\000"
+   VALUE "LegalCopyright", "Freeware - by Cronos\000\000"
+   VALUE "OriginalFilename", "Borg.exe\000"
+  }
+
+ }
+
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x409, 1252
+ }
+
+}
+
+dasm_icon ICON "dasm.ico"
+
+D_help_about DIALOG 28, 15, 240, 120
+STYLE WS_POPUP | WS_DLGFRAME
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDC_BUTTON1, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 96, 93, 48, 12
+ CONTROL "Borg Disassembler", -1, "STATIC", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 76, 17, 88, 9
+ CONTROL "Written By", -1, "STATIC", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 98, 30, 44, 9
+ CONTROL "CRONOS", -1, "STATIC", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 76, 43, 88, 9
+ CONTROL "dasm_icon", -1, "STATIC", SS_ICON | WS_CHILD | WS_VISIBLE, 12, 17, 18, 20
+ CONTROL "http://www.cronos.cc/", idc_website, "button", BS_PUSHBUTTON | BS_CENTER | BS_FLAT | WS_CHILD | WS_VISIBLE, 78, 72, 84, 12
+ CONTROL "Email:Cronos@ntlworld.com", idc_email, "button", BS_PUSHBUTTON | BS_CENTER | BS_FLAT | WS_CHILD | WS_VISIBLE, 70, 56, 100, 13, 0
+}
+
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    Jaddr_Editor, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 146
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 43
+    END
+
+    OEP_Editor, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 148
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 59
+    END
+END
+
+STRINGTABLE 
+{
+ IDS_FILTERSTRING, "All Files(*.*)|*.*|Exe Files (*.exe)|*.exe|Dll Files(*.dll)|*.dll|Com Files (*.com)|*.com||"
+ IDS_FILTERSAVE, "All Files (*.*)|*.*||"
+}
+
+
+D_checktype DIALOG 9, 21, 281, 157
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Borg Disassembler - File Open Options"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 139, 138, 50, 14
+ CONTROL "Open As", IDC_GROUPBOX1, "BUTTON", BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 5, 7, 115, 51
+ CONTROL "PE Executable", IDC_DEFAULTBUTTON, "BUTTON", BS_AUTORADIOBUTTON | BS_LEFTTEXT | WS_CHILD | WS_VISIBLE | WS_GROUP, 19, 16, 77, 12
+ CONTROL "DOS Executable", IDC_DOSBUTTON, "BUTTON", BS_AUTORADIOBUTTON | BS_LEFTTEXT | WS_CHILD | WS_VISIBLE, 19, 30, 77, 12
+ CONTROL "Binary File", IDC_BINBUTTON, "BUTTON", BS_AUTORADIOBUTTON | BS_LEFTTEXT | WS_CHILD | WS_VISIBLE, 19, 44, 77, 12
+ CONTROL "Options", IDC_GROUPBOX2, "BUTTON", BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 6, 63, 115, 87
+ CONTROL "(PE)Load Resources", IDC_LOADRESOURCES, "BUTTON", BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 74, 89, 12
+ CONTROL "(PE)Load Debug Obj.", load_debug, "BUTTON", BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 86, 89, 12
+ CONTROL "(PE)Load Data", IDC_LOADDATA, "BUTTON", BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 98, 89, 12
+ CONTROL "8/16-bit Disassembly", IDC_16DASM, "BUTTON", BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 110, 89, 12
+ CONTROL "32-bit Disassembly", IDC_32DASM, "BUTTON", BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 122, 89, 12
+ CONTROL "Demangle Import Names", demangle_names, "BUTTON", BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 134, 89, 12
+ CONTROL "", IDC_SEGEDIT, "EDIT", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 240, 12, 37, 10
+ CONTROL "", IDC_OFFSEDIT, "EDIT", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 240, 26, 37, 10
+ CONTROL "Load Offset (Binary File)", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 135, 26, 95, 10
+ CONTROL "Load Segment (Binary/DOS)", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 135, 12, 95, 10
+ CONTROL "", IDC_LISTBOX1, "LISTBOX", LBS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL, 135, 50, 141, 74
+ CONTROL "Help", IDC_HELPBUTTON1, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 217, 138, 50, 14
+ CONTROL "Code Options", more_options, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 139, 119, 50, 14
+}
+
+HELPDIALOG_1 DIALOG 18, 40, 288, 111
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Borg Disassembler - File Open Options Help"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 119, 87, 50, 14
+ CONTROL "Open As:Choose the file type. Best guess is already selected.", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 5, 278, 11
+ CONTROL "Options:8/16 bit Disassembly forces Borg into 16-bit mode.", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 16, 278, 11
+ CONTROL "Options:32-bit Disassembly forces Borg into 32 bit mode.", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 27, 278, 11
+ CONTROL "Loading of Resources and Data objects in PE files can be disabled.", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 38, 278, 11
+ CONTROL "Options:Rename DLL Entries - Borg will normally try to rename DLL imports", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 49, 278, 11
+ CONTROL "  imports as best it can. You can stop Borg from trying to demangle DLL names.", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 60, 278, 11
+ CONTROL "The loading segment can be changed for DOS/Binary files and offset for Binary files.", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 71, 278, 11
+}
+
+Borg_Shutdown DIALOG 72, 45, 80, 15
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_DLGFRAME
+FONT 12, "MS Sans Serif"
+{
+ CTEXT "Borg Shutdown", -1, 7, 3, 65, 9
+}
+
+
+Seg_Viewer DIALOG 37, 35, 240, 155
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Segment Viewer"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_SEGLISTBOX, "LISTBOX", LBS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL, 3, 21, 84, 122
+ CONTROL "Select Segment", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 6, 4, 60, 12
+ CONTROL "Start:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 102, 17, 43, 13
+ CONTROL "End:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 102, 29, 43, 13
+ CONTROL "Size:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 102, 41, 43, 13
+ CONTROL "Type:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 102, 53, 43, 13
+ CONTROL "Text", SEG_TEXTSTART, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 156, 17, 71, 13
+ CONTROL "Text", SEG_TEXTEND, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 156, 29, 70, 13
+ CONTROL "Text", SEG_TEXTSIZE, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 156, 41, 70, 13
+ CONTROL "Text", SEG_TEXTTYPE, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 156, 53, 72, 13
+ CONTROL "Text", IDC_SEGNAMETEXT, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 102, 65, 127, 20
+ CONTROL "Segment Properties", IDC_GROUPBOX3, "BUTTON", BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 95, 6, 140, 85
+ CONTROL "OK", IDC_OKBUTTON, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 146, 125, 36, 13
+ CONTROL "Jump To", IDC_JUMPTOBUTTON, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 146, 99, 36, 13
+}
+
+help_shortcuts DIALOG 15, 113, 344, 129
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Borg Help Shortcut Summary"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 147, 108, 50, 14
+ CONTROL "disassembles from current line if possible\nundefine the current line\nundefine the next 10 lines\njump to address\nmake into dword\nmake into word\nmake into string (C style)\nmake into string (Pascal style)\nName Location\nSearch (again)", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 31, 22, 136, 82
+ CONTROL "Shortcut Keys Summary", -1, "STATIC", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_GROUP, 130, 6, 83, 10
+ CONTROL "c:\nu:\nU:\nEnter:\nd:\nw:\ns:\np:\nn:\nF3:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 22, 25, 82
+ CONTROL "Esc:\nF1:\nH:\nD:\nC:\no:\n;:\n-:\nt:\nb:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 181, 22, 25, 82
+ CONTROL "Return using Call Stack\nThis Summary\nHex Argument\nDec Argument\nChar Argument\nOffset (Dseg)\nEnter Comment\nNegate Immediate\nMark Top of Block\nMark Bottom of Block", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 213, 22, 126, 82
+}
+
+Names_Viewer DIALOG 56, 42, 250, 181
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Names Viewer"
+FONT 8, "MS Sans Serif"
+{
+ LISTBOX IDC_NAMESLISTBOX, 9, 21, 121, 147, LBS_NOTIFY | WS_BORDER | WS_BORDER | WS_VSCROLL
+ LTEXT "Select Name", -1, 6, 4, 60, 12
+ LTEXT "Segment:", -1, 142, 21, 43, 13
+ LTEXT "Offset:", -1, 142, 33, 43, 13
+ LTEXT "Text", NAMES_TEXTSTART, 196, 21, 43, 13
+ LTEXT "Text", NAMES_TEXTEND, 196, 33, 43, 13
+ GROUPBOX "Name Properties", IDC_GROUPBOX3, 139, 6, 101, 46, BS_GROUPBOX
+ PUSHBUTTON "OK", IDC_OKBUTTON, 172, 138, 36, 13
+ PUSHBUTTON "Jump To", IDC_JUMPTOBUTTON, 172, 115, 36, 13
+ PUSHBUTTON "Rename", NAMES_RENAME, 172, 69, 36, 13
+ PUSHBUTTON "Delete", NAMES_DELETE, 172, 92, 36, 13
+}
+
+Get_Name DIALOG 39, 55, 141, 60
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Name Location"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 42, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 84, 42, 50, 14
+ CONTROL "", IDC_NAMEEDIT, "EDIT", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 14, 21, 117, 13
+ CONTROL "Type the Name Below", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 8, 103, 11
+}
+
+Xrefs_Viewer DIALOG 15, 42, 198, 190
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Xrefs Viewer"
+FONT 8, "MS Sans Serif"
+{
+ LISTBOX IDC_XREFSLISTBOX, 9, 21, 121, 156, LBS_NOTIFY | WS_BORDER | WS_BORDER | WS_VSCROLL
+ LTEXT "Select Xref", -1, 6, 4, 60, 12
+ PUSHBUTTON "OK", IDC_OKBUTTON, 146, 106, 36, 13
+ PUSHBUTTON "Jump To", IDC_JUMPTOBUTTON, 146, 83, 36, 13
+ PUSHBUTTON "Delete", XREFS_DELETE, 146, 60, 36, 13
+}
+
+Imports_Viewer DIALOG 56, 42, 250, 172
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Imports Viewer"
+FONT 8, "MS Sans Serif"
+{
+ LISTBOX IDC_IMPORTSLISTBOX, 9, 21, 121, 137, LBS_NOTIFY | WS_BORDER | WS_BORDER | WS_VSCROLL
+ LTEXT "Select Import", -1, 6, 4, 60, 12
+ LTEXT "Segment:", -1, 142, 21, 43, 13
+ LTEXT "Offset:", -1, 142, 33, 43, 13
+ LTEXT "Text", IMPORTS_TEXTSTART, 196, 21, 43, 13
+ LTEXT "Text", IMPORTS_TEXTEND, 196, 33, 43, 13
+ GROUPBOX "Import Properties", IDC_GROUPBOX3, 139, 6, 101, 46, BS_GROUPBOX
+ PUSHBUTTON "OK", IDC_OKBUTTON, 170, 66, 36, 13
+}
+
+Exports_Viewer DIALOG 56, 42, 250, 160
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Exports Viewer"
+FONT 8, "MS Sans Serif"
+{
+ LISTBOX IDC_EXPORTSLISTBOX, 9, 21, 121, 127, LBS_NOTIFY | WS_BORDER | WS_BORDER | WS_VSCROLL
+ LTEXT "Select Export", -1, 6, 4, 60, 12
+ LTEXT "Segment:", -1, 142, 21, 43, 13
+ LTEXT "Offset:", -1, 142, 33, 43, 13
+ LTEXT "Text", EXPORTS_TEXTSTART, 196, 21, 43, 13
+ LTEXT "Text", EXPORTS_TEXTEND, 196, 33, 43, 13
+ GROUPBOX "Export Properties", IDC_GROUPBOX3, 139, 6, 101, 46, BS_GROUPBOX
+ PUSHBUTTON "OK", IDC_OKBUTTON, 171, 99, 36, 13
+ PUSHBUTTON "Jump To", IDC_JUMPTOBUTTON, 171, 73, 36, 13
+}
+
+
+Search_Dialog DIALOG 93, 77, 234, 148
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Search"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 49, 123, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 135, 123, 50, 14
+ CONTROL "Enter search string or sequence of bytes(no spaces) or number", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 14, 10, 206, 14
+ CONTROL "", search_edit, "EDIT", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 15, 27, 204, 13
+ CONTROL "Options", IDC_GROUPBOX4, "BUTTON", BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 11, 49, 211, 38
+ CONTROL "String", search_string, "BUTTON", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP, 29, 56, 75, 14
+ CONTROL "Bytes", search_bytes, "BUTTON", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 29, 71, 71, 13
+ CONTROL "Hex Number", search_hex, "BUTTON", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 134, 56, 80, 14
+ CONTROL "Decimal Number", search_decimal, "BUTTON", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 134, 71, 83, 13
+ CONTROL "From Start", search_fromstart, "BUTTON", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP, 44, 99, 71, 13
+ CONTROL "From Current Line", search_fromcurr, "BUTTON", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 119, 99, 83, 13
+}
+
+
+S_Box DIALOG 87, 92, 48, 16
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_DLGFRAME
+FONT 10, "MS Sans Serif"
+{
+ CTEXT "Searching...", -1, 3, 3, 41, 10
+}
+
+
+Advanced_Options DIALOG 87, 51, 194, 119
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Advanced Options"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 72, 96, 50, 14
+ CONTROL "Detect push (e)bp, mov (e)bp,(e)sp as code", advanced_pushbp, "BUTTON", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 4, 171, 12
+ CONTROL "Detect Enter xx,00 as code", advanced_enter, "BUTTON", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 41, 171, 12
+ CONTROL "Detect mov bx,sp as code", advanced_movbx, "BUTTON", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 54, 171, 12
+ CONTROL "Aggressive Code Analysis in Code Segments", advanced_aggressive, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 68, 171, 12, 0
+ CONTROL "Detect push (e)bp, mov (e)ax,[(e)sp+xxh] as code", advanced_eaxfromesp, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 17, 171, 12, 0
+ CONTROL "Detect mov (e)ax,[(e)sp+xxh] as code", advanced_moveax, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 29, 171, 12, 0
+}
+
+load_box DIALOG 87, 92, 48, 16
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_DLGFRAME
+FONT 10, "MS Sans Serif"
+{
+ CTEXT "Loading...", -1, 3, 3, 41, 10
+}
+
+save_box DIALOG 87, 92, 48, 16
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_DLGFRAME
+FONT 10, "MS Sans Serif"
+{
+ CTEXT "Saving...", -1, 3, 3, 41, 10
+}
+
+Comment_Editor DIALOG 0, 0, 240, 42
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Comment Editor"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 39, 20, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 151, 20, 50, 14
+ CONTROL "", IDC_COMMENTEDIT, "edit", ES_LEFT | ES_NOHIDESEL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 4, 4, 232, 12, 0
+}
+
+Block_Dialog DIALOG 0, 0, 150, 91
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Block Bounds"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 50, 68, 50, 14
+ CONTROL "Text", Text_Top, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 77, 8, 68, 13, 0
+ CONTROL "Text", Text_Bottom, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 77, 28, 68, 14, 0
+ CONTROL "Text", Text_Status, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 5, 51, 140, 13, 0
+ CONTROL "Block Top", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 5, 8, 52, 8, 0
+ CONTROL "Block Bottom", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 5, 28, 56, 8, 0
+}
+
+Decrypt_Dialog DIALOG 0, 0, 239, 119
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Decryptor Settings"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 177, 6, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 177, 24, 50, 14
+ CONTROL "Type", IDC_GROUPBOX5, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 93, 3, 69, 71, 0
+ CONTROL "Byte", idc_byte, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 102, 12, 48, 9, 0
+ CONTROL "Word", idc_word, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 102, 27, 48, 9, 0
+ CONTROL "Dword", idc_dword, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 102, 42, 53, 9, 0
+ CONTROL "Array", idc_array, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 102, 58, 51, 9, 0
+ CONTROL "Decryptor", IDC_GROUPBOX6, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 6, 3, 77, 96, 0
+ CONTROL "XOR", idc_xor, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 15, 12, 60, 9, 0
+ CONTROL "ADD", idc_add, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 26, 60, 9, 0
+ CONTROL "SUB", idc_sub, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 40, 60, 9, 0
+ CONTROL "MUL", idc_mul, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 54, 60, 9, 0
+ CONTROL "Rotate Left", idc_rot, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 68, 60, 9, 0
+ CONTROL "XADD", idc_xadd, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 84, 60, 9, 0
+ CONTROL "Patch Exe", idc_applytoexe, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 171, 45, 60, 12, 0
+ CONTROL "", idc_value, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 153, 81, 53, 12, 0
+ CONTROL "Value (Hex):", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 93, 81, 51, 10, 0
+ CONTROL "Array Segment:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 105, 54, 9, 0
+ CONTROL "", idc_arrayseg, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 66, 102, 45, 12, 0
+ CONTROL "", idc_arrayoffset, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 171, 102, 51, 12, 0
+ CONTROL "Array Offset:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 120, 105, 48, 9, 0
+}
+
+Jaddr_Editor DIALOG DISCARDABLE  0, 0, 151, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Jump To....... (offset in Hex)"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,19,26,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,79,26,50,14
+    EDITTEXT        IDC_JADDREDIT,68,8,72,12,ES_AUTOHSCROLL
+    LTEXT           "Enter Address",IDC_STATIC,8,8,53,13,SS_CENTERIMAGE
+END
+
+OEP_Editor DIALOG DISCARDABLE  0, 0, 151, 62
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Change OEP"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,18,39,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,83,39,50,14
+    LTEXT           "New OEP (hex)",IDC_STATIC,7,7,59,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_OEPEDIT,75,7,66,12,ES_AUTOHSCROLL
+    CONTROL         "Patch Executable with new OEP",IDC_PATCHOEP,"Button",
+                    BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,23,120,14
+END
+
+
+
