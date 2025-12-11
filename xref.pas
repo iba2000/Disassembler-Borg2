@@ -1,6 +1,6 @@
 unit xref;
 interface
-uses sysutils,windows,common,gname,datas,schedule,savefile,mainwind,menus;
+uses sysutils,windows,common,gname,datas,schedule,savefile,mainwind,menu;
 
 // class to maintain xref list - xref items consist simply of an address
 // which is the location being referenced and a ref_by address which is

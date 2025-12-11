@@ -1,6 +1,6 @@
 unit help;
 interface
-uses windows,shellapi,sysutils,common,menus;
+uses windows,shellapi,sysutils,common,menu;
 
 function helpshortcuts(hdwnd,msg,wParam,lParam:dword):dword;stdcall;
 function habox(hdwnd:HWND; msg,wParam,lParam:dword):dword;stdcall;

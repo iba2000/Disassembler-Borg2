@@ -1,7 +1,7 @@
 unit user_dlg;
 interface
 uses windows,sysutils,common,schedule,gname,disio,range,xref,datas,
-     disasm,exeload,menus;
+     disasm,exeload,menu;
 {************************************************************************
 * - the functions here are viewers for various lists within Borg, for   *
 *   example exports,imports and xrefs Dialog box viewers, along with    *

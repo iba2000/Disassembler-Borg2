@@ -1,6 +1,6 @@
 unit gname;
 interface
-uses sysutils,windows,common,savefile,menus,mainwind;
+uses sysutils,windows,common,savefile,menu,mainwind;
 const
   GNAME_MAXLEN =40;
 

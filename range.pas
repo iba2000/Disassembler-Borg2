@@ -1,6 +1,6 @@
 unit range;
 interface
-uses sysutils,windows,common,menus;
+uses sysutils,windows,common,menu;
 
 // This range class started out as just that - a range class for pairs   *
 // of lptr's, but ended up as a class for defining a block more than a   *

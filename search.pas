@@ -1,6 +1,6 @@
 unit search;
 interface
-uses sysutils,windows,common,menus,schedule,datas,disasm,disio;
+uses sysutils,windows,common,menu,schedule,datas,disasm,disio;
 {
   >* These are the functions which handle searching. I still have more     *
   >* work to do on searching (particularly regarding strings - unicode,    *

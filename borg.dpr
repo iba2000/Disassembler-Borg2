@@ -1,5 +1,5 @@
 uses
-  sysutils,windows,commdlg,common,menus,schedule,mainwind,
+  sysutils,windows,commdlg,common,menu,schedule,mainwind,
   exeload,disio,datas,gname,xref,proctab,search,range,decrypt,
   database,user_dlg,dlg_load,help,user_fn,registry;
 {$R dasm.res}

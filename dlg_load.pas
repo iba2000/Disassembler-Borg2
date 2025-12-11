@@ -1,7 +1,7 @@
 //v2.28
 unit dlg_load;
 interface
-uses windows,sysutils,commdlg,common,menus,exeload,proctab,help,disasm;
+uses windows,sysutils,commdlg,common,menu,exeload,proctab,help,disasm;
 {************************************************************************
 * Contains the dialog routines for the load file dialogboxes            *
 ************************************************************************}

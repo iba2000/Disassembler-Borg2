@@ -1,6 +1,6 @@
 unit database;
 interface
-uses windows,sysutils,commdlg,classes,common,savefile,menus,datas,disasm,
+uses windows,sysutils,commdlg,classes,common,savefile,menu,datas,disasm,
      gname,relocs,xref,decrypt,exeload,schedule,disio,proctab;
 
 procedure savedb;

@@ -1,6 +1,6 @@
 unit user_fn;
 interface
-uses windows,sysutils,commdlg,common,menus,schedule,range,decrypt;
+uses windows,sysutils,commdlg,common,menu,schedule,range,decrypt;
 {************************************************************************
 * - the functions here are various user dialogs and directly callable   *
 *   routines, these are all primary thread routines                     *

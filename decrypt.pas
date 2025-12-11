@@ -1,7 +1,7 @@
 unit decrypt;
 interface
 uses windows,common,gname,savefile,datas,disasm,disio,exeload,range,
-     schedule,menus;
+     schedule,menu;
 {************************************************************************
 * This class adds some simple block decryption/encryption with file     *
 * patching to Borg. By storing decryptors in blocks it is possible to   *

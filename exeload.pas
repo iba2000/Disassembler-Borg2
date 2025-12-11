@@ -1,6 +1,6 @@
 unit exeload;
 interface
-uses classes,sysutils,windows,common,menus,gname,savefile,datas,
+uses classes,sysutils,windows,common,menu,gname,savefile,datas,
      relocs,xref,schedule,proctab;
 {************************************************************************
 * Contains the executable file load routines and setting up of the      *

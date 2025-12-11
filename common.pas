@@ -1,6 +1,6 @@
 unit common;
 interface
-uses classes,sysutils,windows,commdlg,menus;
+uses classes,sysutils,windows,commdlg,menu;
 
 //remove comment on line below for debug mode.
 //{$DEFINE DEBUG}

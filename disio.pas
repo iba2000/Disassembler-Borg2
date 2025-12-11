@@ -1,7 +1,7 @@
 unit disio;
 interface
 uses sysutils,windows,common,gname,stacks,savefile,disasm,proctab,datas,
-     mainwind,schedule,xref,menus,range;
+     mainwind,schedule,xref,menu,range;
 
 {************************************************************************
 * This is a fairly big class, and yet it was originally part of the     *
